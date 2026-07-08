@@ -1,30 +1,36 @@
-// This is a basic Flutter widget test.
-//
-// To perform an interaction with a widget in your test, use the WidgetTester
-// utility in the flutter_test package. For example, you can send tap and scroll
-// gestures. You can also use WidgetTester to find child widgets in the widget
-// tree, read text, and verify that the values of widget properties are correct.
-
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
-
 import 'package:localguide/main.dart';
+import 'package:localguide/screens/home_screen.dart';
 
 void main() {
-  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
-    await tester.pumpWidget(const MyApp());
+  testWidgets('L\'écran d\'accueil affiche le titre et le champ de recherche', (tester) async {
+    // Construire l'écran dans un ProviderScope
+    await tester.pumpWidget(
+      const ProviderScope(
+        child: MaterialApp(
+          home: HomeScreen(),
+        ),
+      ),
+    );
 
-    // Verify that our counter starts at 0.
-    expect(find.text('0'), findsOneWidget);
-    expect(find.text('1'), findsNothing);
+    // Vérifier que le titre de l'AppBar est présent
+    expect(find.text('Découvrir'), findsOneWidget);
 
-    // Tap the '+' icon and trigger a frame.
-    await tester.tap(find.byIcon(Icons.add));
-    await tester.pump();
+    // Vérifier que le champ de recherche est présent
+    expect(find.byType(TextField), findsOneWidget);
 
-    // Verify that our counter has incremented.
-    expect(find.text('0'), findsNothing);
-    expect(find.text('1'), findsOneWidget);
+    // Vérifier que le filtre "Tous" est présent
+    expect(find.text('Tous'), findsOneWidget);
+  });
+
+  testWidgets('L\'application se lance sans erreur', (tester) async {
+    await tester.pumpWidget(const ProviderScope(child: MyApp()));
+    // Attendre que l'UI se stabilise
+    await tester.pumpAndSettle();
+
+    // Vérifier que l'AppBar principale est présente
+    expect(find.text('Découvrir'), findsOneWidget);
   });
 }
