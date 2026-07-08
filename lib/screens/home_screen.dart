@@ -12,7 +12,13 @@ class HomeScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final lieuxState = ref.watch(lieuxProvider);
     final filteredLieux = ref.watch(filteredLieuxProvider);
-    final categories = ['nature','gastronomie','culture','activite','autre'];
+    final categories = [
+      'nature',
+      'gastronomie',
+      'culture',
+      'activite',
+      'autre'
+    ];
 
     return Scaffold(
       appBar: AppBar(title: const Text('Découvrir')),
@@ -24,9 +30,11 @@ class HomeScreen extends ConsumerWidget {
               decoration: const InputDecoration(
                 hintText: 'Rechercher...',
                 prefixIcon: Icon(Icons.search),
-                border: OutlineInputBorder(borderRadius: BorderRadius.all(Radius.circular(8))),
+                border: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(8))),
               ),
-              onChanged: (val) => ref.read(searchQueryProvider.notifier).state = val,
+              onChanged: (val) =>
+                  ref.read(searchQueryProvider.notifier).state = val,
             ),
           ),
           SizedBox(
@@ -42,7 +50,8 @@ class HomeScreen extends ConsumerWidget {
                   return FilterChip(
                     label: const Text('Tous'),
                     selected: selected,
-                    onSelected: (_) => ref.read(categoryFilterProvider.notifier).state = null,
+                    onSelected: (_) =>
+                        ref.read(categoryFilterProvider.notifier).state = null,
                   );
                 }
                 final cat = categories[i - 1];
@@ -50,7 +59,8 @@ class HomeScreen extends ConsumerWidget {
                 return FilterChip(
                   label: Text(cat),
                   selected: selected,
-                  onSelected: (_) => ref.read(categoryFilterProvider.notifier).state = cat,
+                  onSelected: (_) =>
+                      ref.read(categoryFilterProvider.notifier).state = cat,
                 );
               },
             ),
@@ -68,15 +78,17 @@ class HomeScreen extends ConsumerWidget {
                   itemBuilder: (ctx, idx) {
                     final l = filteredLieux[idx];
                     return Card(
-                      margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                      margin: const EdgeInsets.symmetric(
+                          horizontal: 12, vertical: 6),
                       child: ListTile(
                         leading: l.imagesUrls.isNotEmpty
-                            ? Image.network(
+                            ? Image.asset(
                                 l.imagesUrls.first,
                                 width: 60,
                                 height: 60,
                                 fit: BoxFit.cover,
-                                errorBuilder: (_, __, ___) => const Icon(Icons.broken_image, size: 40),
+                                errorBuilder: (_, __, ___) =>
+                                    const Icon(Icons.broken_image, size: 40),
                               )
                             : const Icon(Icons.place, size: 40),
                         title: Text(l.nom),

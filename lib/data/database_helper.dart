@@ -51,46 +51,46 @@ class DatabaseHelper {
 
     // URLs avec ID fixes – fonctionnent toujours
     final lieux = [
-      {
-        'id':'1','nom':'Château de la Loire','description':'Magnifique château renaissance.',
-        'categorie':'culture','latitude':47.259,'longitude':-0.077,
-        'adresse':'15 Rue du Château, 37000 Tours','horaires':'10:00-18:00',
-        'imagesUrls':'https://picsum.photos/id/1015/400/300,https://picsum.photos/id/1016/400/300',
-        'noteMoyenne':4.7
-      },
-      {
-        'id':'2','nom':'Restaurant Le Terroir','description':'Cuisine régionale authentique.',
-        'categorie':'gastronomie','latitude':47.392,'longitude':0.688,
-        'adresse':'5 Place du Marché, 37000 Tours','horaires':'12:00-14:30,19:00-22:00',
-        'imagesUrls':'https://picsum.photos/id/1060/400/300,https://picsum.photos/id/1061/400/300',
-        'noteMoyenne':4.5
-      },
-      {
-        'id':'3','nom':'Parc Naturel Régional','description':'Espace protégé avec sentiers.',
-        'categorie':'nature','latitude':47.500,'longitude':0.900,
-        'adresse':'Route de la Forêt, 37000 Tours','horaires':'8:00-20:00',
-        'imagesUrls':'https://picsum.photos/id/1040/400/300,https://picsum.photos/id/1041/400/300',
-        'noteMoyenne':4.8
-      },
-      {
-        'id':'4','nom':'Canoë-Kayak','description':'Descente de rivière encadrée.',
-        'categorie':'activite','latitude':47.220,'longitude':0.150,
-        'adresse':'Base nautique, 37000 Tours','horaires':'9:00-17:00',
-        'imagesUrls':'https://picsum.photos/id/1025/400/300,https://picsum.photos/id/1026/400/300',
-        'noteMoyenne':4.3
-      },
-      {
-        'id':'5','nom':'Cathédrale Saint-Gatien','description':'Cathédrale gothique du XIIIe.',
-        'categorie':'culture','latitude':47.396,'longitude':0.694,
-        'adresse':'Place de la Cathédrale, 37000 Tours','horaires':'9:30-18:00',
-        'imagesUrls':'https://picsum.photos/id/1039/400/300,https://picsum.photos/id/1044/400/300',
-        'noteMoyenne':4.6
-      },
-    ];
-    for (var l in lieux) {
-      await db.insert('lieux', l, conflictAlgorithm: ConflictAlgorithm.replace);
-    }
+    {
+      'id':'1','nom':'Château de la Loire','description':'Magnifique château renaissance.',
+      'categorie':'culture','latitude':47.259,'longitude':-0.077,
+      'adresse':'15 Rue du Château, 37000 Tours','horaires':'10:00-18:00',
+      'imagesUrls':'assets/images/chateau.jpg', // une seule image
+      'noteMoyenne':4.7
+    },
+    {
+      'id':'2','nom':'Restaurant Le Terroir','description':'Cuisine régionale authentique.',
+      'categorie':'gastronomie','latitude':47.392,'longitude':0.688,
+      'adresse':'5 Place du Marché, 37000 Tours','horaires':'12:00-14:30,19:00-22:00',
+      'imagesUrls':'assets/images/restaurant.jpg',
+      'noteMoyenne':4.5
+    },
+    {
+      'id':'3','nom':'Parc Naturel Régional','description':'Espace protégé avec sentiers.',
+      'categorie':'nature','latitude':47.500,'longitude':0.900,
+      'adresse':'Route de la Forêt, 37000 Tours','horaires':'8:00-20:00',
+      'imagesUrls':'assets/images/parc.jpg',
+      'noteMoyenne':4.8
+    },
+    {
+      'id':'4','nom':'Canoë-Kayak','description':'Descente de rivière encadrée.',
+      'categorie':'activite','latitude':47.220,'longitude':0.150,
+      'adresse':'Base nautique, 37000 Tours','horaires':'9:00-17:00',
+      'imagesUrls':'assets/images/canoe.jpg',
+      'noteMoyenne':4.3
+    },
+    {
+      'id':'5','nom':'Cathédrale Saint-Gatien','description':'Cathédrale gothique du XIIIe.',
+      'categorie':'culture','latitude':47.396,'longitude':0.694,
+      'adresse':'Place de la Cathédrale, 37000 Tours','horaires':'9:30-18:00',
+      'imagesUrls':'assets/images/cathedrale.jpg',
+      'noteMoyenne':4.6
+    },
+  ];
+  for (var l in lieux) {
+    await db.insert('lieux', l, conflictAlgorithm: ConflictAlgorithm.replace);
   }
+}
 
   Future<List<Map<String, dynamic>>> getLieux() async {
     final db = await database;

@@ -26,7 +26,14 @@ class FavoritesScreen extends ConsumerWidget {
                 margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                 child: ListTile(
                   leading: l.imagesUrls.isNotEmpty
-                      ? Image.network(l.imagesUrls.first, width: 60, height: 60, fit: BoxFit.cover)
+                      ? Image.asset(
+                          l.imagesUrls.first,
+                          width: 60,
+                          height: 60,
+                          fit: BoxFit.cover,
+                          errorBuilder: (_, __, ___) =>
+                              const Icon(Icons.broken_image, size: 40),
+                        )
                       : const Icon(Icons.place, size: 40),
                   title: Text(l.nom),
                   subtitle: Text(l.adresse),

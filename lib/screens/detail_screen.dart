@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 import '../providers/lieu_provider.dart';
 import '../providers/favori_provider.dart';
 import '../models/lieu.dart';
@@ -24,7 +23,8 @@ class DetailScreen extends ConsumerWidget {
             data: (isFav) => lieuAsync.when(
               data: (lieu) => lieu != null
                   ? IconButton(
-                      icon: Icon(isFav ? Icons.favorite : Icons.favorite_border, color: isFav ? Colors.red : null),
+                      icon: Icon(isFav ? Icons.favorite : Icons.favorite_border,
+                          color: isFav ? Colors.red : null),
                       onPressed: () => notifier.toggle(id),
                     )
                   : const SizedBox.shrink(),
@@ -37,7 +37,9 @@ class DetailScreen extends ConsumerWidget {
         ],
       ),
       body: lieuAsync.when(
-        data: (lieu) => lieu != null ? _Body(lieu: lieu) : const Center(child: Text('Lieu introuvable')),
+        data: (lieu) => lieu != null
+            ? _Body(lieu: lieu)
+            : const Center(child: Text('Lieu introuvable')),
         loading: () => const Center(child: CircularProgressIndicator()),
         error: (e, _) => Center(child: Text('Erreur : $e')),
       ),
@@ -60,12 +62,16 @@ class _Body extends StatelessWidget {
             SizedBox(
               height: 200,
               child: PageView(
-                children: lieu.imagesUrls.map((url) => CachedNetworkImage(
-                  imageUrl: url,
-                  fit: BoxFit.cover,
-                  placeholder: (_, __) => const Center(child: CircularProgressIndicator()),
-                  errorWidget: (_, __, ___) => const Icon(Icons.broken_image, size: 80, color: Colors.grey),
-                )).toList(),
+                children: lieu.imagesUrls
+                    .map((path) => Image.asset(
+                          path,
+                          fit: BoxFit.cover,
+                          errorBuilder: (_, __, ___) => const Icon(
+                              Icons.broken_image,
+                              size: 80,
+                              color: Colors.grey),
+                        ))
+                    .toList(),
               ),
             )
           else
