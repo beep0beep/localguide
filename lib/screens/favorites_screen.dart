@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart'; // <-- Import ajouté
 import '../providers/favori_provider.dart';
-import '../models/lieu.dart';
 
 class FavoritesScreen extends ConsumerWidget {
   const FavoritesScreen({super.key});
@@ -41,7 +41,7 @@ class FavoritesScreen extends ConsumerWidget {
                     icon: const Icon(Icons.delete, color: Colors.red),
                     onPressed: () => notifier.toggle(l.id),
                   ),
-                  onTap: () => Navigator.pushNamed(context, '/detail/${l.id}'),
+                  onTap: () => context.push('/detail/${l.id}'), // <-- Utilisation de go_router
                 ),
               );
             },

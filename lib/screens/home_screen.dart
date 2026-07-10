@@ -3,7 +3,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import '../providers/lieu_provider.dart';
 import '../providers/search_provider.dart';
-import '../models/lieu.dart';
 
 class HomeScreen extends ConsumerWidget {
   const HomeScreen({super.key});
